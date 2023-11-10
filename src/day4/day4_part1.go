@@ -12,7 +12,7 @@ func Day4_part1() int {
 
 	var total int = 0
 	for _, line := range lines {
-		if check_overlaps((parse(line))) {
+		if check_total_overlaps((parse(line))) {
 			total++
 		}
 	}
@@ -20,17 +20,27 @@ func Day4_part1() int {
 	return total
 }
 
-func parse(line string) [4]int {
-	elf1 := strings.Split(line, ",")[0]
-	elf2 := strings.Split(line, ",")[1]
-	e1a, _ := strconv.Atoi(strings.Split(elf1, "-")[0])
-	e1b, _ := strconv.Atoi(strings.Split(elf1, "-")[1])
-	e2a, _ := strconv.Atoi(strings.Split(elf2, "-")[0])
-	e2b, _ := strconv.Atoi(strings.Split(elf2, "-")[1])
-	return [4]int{e1a, e1b, e2a, e2b}
+func Day4_part2() int {
+
+	var total int = 0
+	for _, line := range lines {
+		if check_any_overlaps((parse(line))) {
+			total++
+		}
+	}
+
+	return total
 }
 
-func check_overlaps(claims [4]int) bool {
-	// ToDo
+func parse(line string) []int {
+	ss := strings.Split(strings.Replace(line, ",", "-", -1), "-")
+	return utils.Map(ss, func(s string) int { i, _ := strconv.Atoi(s); return i })
+}
+
+func check_total_overlaps(claims []int) bool {
 	return (((claims[0] <= claims[2]) && (claims[1] >= claims[3])) || ((claims[2] <= claims[0]) && (claims[3] >= claims[1])))
+}
+
+func check_any_overlaps(claims []int) bool {
+	return !((claims[1] < claims[2]) || (claims[0] > claims[3]))
 }

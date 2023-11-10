@@ -48,3 +48,11 @@ func Check_all() bool {
 }
 
 var suite_passed = true
+
+func Map[A, B any](as []A, f func(A) B) []B {
+	result := make([]B, len(as))
+	for i, a := range as {
+		result[i] = f(a)
+	}
+	return result
+}

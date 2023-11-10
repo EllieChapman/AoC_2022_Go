@@ -29,6 +29,8 @@ func main() {
 
 	fmt.Println("Day 4 Part 1")
 	utils.Check_answer(day4.Day4_part1(), 536)
+	fmt.Println("Day 4 Part 2")
+	utils.Check_answer(day4.Day4_part2(), 845)
 
 	utils.Check_all()
 }
