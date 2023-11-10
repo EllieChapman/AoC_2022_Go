@@ -26,7 +26,7 @@ func ReadLines(path string) []string {
 }
 
 // ToDo how can I make this polymorphic for ints and strings?
-func Check_answer(ans int, expect int) bool {
+func Check_answer[A comparable](ans A, expect A) bool {
 	if ans == expect {
 		fmt.Println("Test Passed")
 		return true
