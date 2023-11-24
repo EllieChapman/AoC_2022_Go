@@ -2,7 +2,6 @@ package day4
 
 import (
 	"AoC_2022_Go/src/utils"
-	"strconv"
 	"strings"
 )
 
@@ -34,7 +33,7 @@ func Day4_part2() int {
 
 func parse(line string) []int {
 	ss := strings.Split(strings.Replace(line, ",", "-", -1), "-")
-	return utils.Map(ss, func(s string) int { i, _ := strconv.Atoi(s); return i })
+	return utils.Map(ss, utils.Atoi)
 }
 
 func check_total_overlaps(claims []int) bool {

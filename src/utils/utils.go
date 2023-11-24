@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"slices"
+	"strconv"
 )
 
 // read line by line into memory
@@ -25,7 +27,6 @@ func ReadLines(path string) []string {
 	return lines
 }
 
-// ToDo how can I make this polymorphic for ints and strings?
 func Check_answer[A comparable](ans A, expect A) bool {
 	if ans == expect {
 		fmt.Println("Test Passed")
@@ -42,7 +43,7 @@ func Check_all() bool {
 		println("\nAll tests passed!")
 		return true
 	} else {
-		println("\nSome tests failed")
+		println("\nSome tests failed :(")
 		return false
 	}
 }
@@ -55,4 +56,40 @@ func Map[A, B any](as []A, f func(A) B) []B {
 		result[i] = f(a)
 	}
 	return result
+}
+
+func Flatten[A any](as [][]A) []A {
+	result := make([]A, 0)
+	for _, a := range as {
+		result = append(result, a...)
+	}
+	return result
+}
+
+func Atoi(s string) int {
+	i, err := strconv.Atoi(s)
+	if err != nil {
+		panic("Tried to convert string '" + s + "' to int")
+	}
+	return i
+}
+
+func Sum(s []int) int {
+	total := 0
+	for _, i := range s {
+		total += i
+	}
+	return total
+}
+
+func Reverse[A any](s []A) []A {
+	slices.Reverse(s)
+	return s
+}
+
+func AbsDiffInt(x, y int) int {
+	if x < y {
+		return y - x
+	}
+	return x - y
 }
